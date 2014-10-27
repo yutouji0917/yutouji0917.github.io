@@ -1,0 +1,77 @@
+---
+layout: post
+title: "How to Enable Outgoing Call Vibration without ROOT"
+date: 2014-10-27 21:46:16 +0800
+comments: true
+categories: 
+---
+
+Call Vibrator requires the **radio log** of phone to detect when outgoing call is answered. But since **Android JellyBean(4.1)**, the permission for radio log is not granted to non-system app by default.
+
+If your device is **rooted**, Call Vibrator will prompt a dialog to let user grant the permission to itself.
+
+If your device is **not rooted**, follow the instructions below to grant the permission to Call Vibrator manually.
+
+1. Install the USB driver of your phone
+
+2. On your phone, go to *Settings -> Developer options -> toggle on Android debugging* . (If you don’t  see Developer options in Settings, go to *Settings -> About phone* and tap Build number until you see the message that you are a developer and return to Settings, you will then see Developer options)
+
+    {% img http://huangyu.qiniudn.com/octopress_Settings.png 320 480 'Android Settings' %}
+    {% img http://huangyu.qiniudn.com/octopress_DeveloperOptions.png 320 480 'Developer Options' %}
+    
+
+3. One your PC, download *Read Log Permission Enabler* script from [here](https://bitbucket.org/shaobin0604/readlogpermissionenabler/downloads/readlogpermissionenabler.zip), it’s about 500KB zip file
+
+4. Unzip the content to `C:\`
+
+   ```
+   ├── grant_read_log_permission.bat
+   └── libs
+        ├── adb.exe
+        ├── AdbWinApi.dll
+        └── AdbWinUsbApi.dll
+   ```
+
+5. Click *Start -> Run*, type `cmd`, when the black window opens up, type:
+
+    ```
+    cd C:\readlogpermissionenabler\libs
+    ```
+    
+    {% img http://huangyu.qiniudn.com/octopress_EnterLibsDir.png 'Enter lis dir' %}
+
+6. Connect your phone to the PC with USB cable.
+
+7. make sure that in command prompt your are now at `C:\readlogpermissionenabler\libs` and type:
+
+    ```
+    adb devices
+    ```
+
+    you will see a combination of numbers and letters and the word device, that means you are all set.
+
+    {% img http://huangyu.qiniudn.com/octopress_AdbDevices.png 'adb devices' %}
+
+8. for CallVibrator(Lite) type
+
+    ```
+    adb shell "pm grant io.github.yutouji0917.callvibrator.ad android.permission.READ_LOGS"
+    ```
+
+    for CallVibrator(Donate) type
+
+    ```
+    adb shell "pm grant io.github.yutouji0917.callvibrator.donate android.permission.READ_LOGS" 
+    ```
+
+    {% img http://huangyu.qiniudn.com/octopress_GrantPermission.png 'grant permission' %}
+
+    or if you are tired of input commands, just run the script `grant_read_log_permission.bat` located in `C:\readlogpermissionenabler`
+
+9. Unplug your phone from PC
+
+10. Open the Call Vibrator app. Check all the options you need.
+
+11. Try making a call. If the phone does not vibrate, try reboot the phone and then making a call once again.
+
+That's all, have fun with outgoing call vibration.
