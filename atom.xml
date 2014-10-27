@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://yutouji0917.github.io/atom.xml" rel="self"/>
   <link href="http://yutouji0917.github.io/"/>
-  <updated>2014-10-27T21:47:07+08:00</updated>
+  <updated>2014-10-27T22:06:25+08:00</updated>
   <id>http://yutouji0917.github.io/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -31,7 +31,15 @@
 <p> <img src="http://huangyu.qiniudn.com/octopress_Settings.png" width="320" height="480" title="'Android Settings'" >
  <img src="http://huangyu.qiniudn.com/octopress_DeveloperOptions.png" width="320" height="480" title="'Developer Options'" ></p></li>
 <li><p>One your PC, download <em>Read Log Permission Enabler</em> script from <a href="https://bitbucket.org/shaobin0604/readlogpermissionenabler/downloads/readlogpermissionenabler.zip">here</a>, it’s about 500KB zip file</p></li>
-<li><p>Unzip the content to <code>C:\</code></p></li>
+<li><p>Unzip the content to <code>C:\</code></p>
+
+<pre><code>C:\readlogpermissionenabler
+ ├── grant_read_log_permission.bat
+ └── libs
+      ├── adb.exe
+      ├── AdbWinApi.dll
+      └── AdbWinUsbApi.dll
+</code></pre></li>
 <li><p>Click <em>Start -> Run</em>, type <code>cmd</code>, when the black window opens up, type:</p>
 
 <pre><code class="`"> cd C:\readlogpermissionenabler\libs
