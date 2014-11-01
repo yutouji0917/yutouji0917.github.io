@@ -90,6 +90,8 @@
 
 <p>If your device is <strong>not rooted</strong>, follow the instructions below to grant the permission to Call Vibrator manually.</p>
 
+<h1>Guide</h1>
+
 <ol>
 <li><p>Install the USB driver of your phone</p></li>
 <li><p>On your phone, go to <em>Settings -> Developer options -> toggle on Android debugging</em> . (If you don’t  see Developer options in Settings, go to <em>Settings -> About phone</em> and tap Build number until you see the message that you are a developer and return to Settings, you will then see Developer options)</p>
@@ -141,6 +143,51 @@
 
 
 <p>That&rsquo;s all, have fun with outgoing call vibration.</p>
+
+<h1>FAQ</h1>
+
+<ol>
+<li><p><strong>Q:</strong> My phone is rooted, but outgoing call vibrate still not work.</p>
+
+<p><strong>A:</strong> Outgoing call vibrate requires the <strong>radio log</strong> of phone to detect when the call is answered. But the <strong>radio log</strong> is closed on some phones manufactured by SONY/Samsung/Huawei. You can use the following command to check this:</p>
+
+<pre><code>adb logcat -b radio -v time
+</code></pre>
+
+<p>if you see something like this, your phone can output radio log</p>
+
+<pre><code>11-01 11:45:46.878 E/use-Rlog/RLOG-RIL(s)(   96): RX: (M)0x80  (S)0x01  (T)0x02 (len:0x0C mseq:0xFF aseq:0x37) [ 09 02 03 00 80 ]
+11-01 11:45:46.878 D/RILJ    (  606): [5282]&lt; SET_MUTE 
+11-01 11:45:46.878 D/GsmConnection(  606): [GSMConn] --dssds----null
+11-01 11:45:46.882 D/GsmConnection(  606): [GSMConn] update: parent=DIALING, hasNewParent=false, wasConnectingInOrOut=true, wasHolding=false, isConnectingInOrOut=true, changed=false
+11-01 11:45:47.237 D/RILJ    (  606): [5283]&gt; GET_CURRENT_CALLS
+11-01 11:45:47.241 E/use-Rlog/RLOG-RIL(s)(   96): RX: (M)0x02  (S)0x06  (T)0x02 (len:0x62 mseq:0x00 aseq:0x38) [ 01 00 01 01 01 03 00 05 20 31 30 30 31 30 00 00 
+11-01 11:45:47.241 V/RILJ    (  606): Incoming UUS : NOT present!
+11-01 11:45:47.241 D/RILJ    (  606): InCall VoicePrivacy is disabled
+11-01 11:45:47.245 D/RILJ    (  606): [5283]&lt; GET_CURRENT_CALLS  [id=1,DIALING,toa=129,norm,mo,0,voc,noevp,,cli=1,,0] 
+11-01 11:45:48.003 D/RILJ    (  606): [5284]&gt; SET_MUTE false
+11-01 11:45:48.014 E/use-Rlog/RLOG-RIL(s)(   96): TX: (M)0x09  (S)0x02  (T)0x03 (len:0x08 mseq:0x39 aseq:0x00) [ 00 ]
+11-01 11:45:48.018 E/use-Rlog/RLOG-RIL(s)(   96): RX: (M)0x80  (S)0x01  (T)0x02 (len:0x0C mseq:0xFF aseq:0x39) [ 09 02 03 00 80 ]
+11-01 11:45:48.018 D/RILJ    (  606): [5284]&lt; SET_MUTE 
+11-01 11:45:48.038 D/GsmConnection(  606): [GSMConn] --dssds----null
+11-01 11:45:48.038 D/GsmConnection(  606): [GSMConn] update: parent=DIALING, hasNewParent=false, wasConnectingInOrOut=true, wasHolding=false, isConnectingInOrOut=true, changed=false
+</code></pre></li>
+<li><p><strong>Q:</strong> I&rsquo;ve granted read log permission to Call Vibrator, but outgoing call vibrate still not work.</p>
+
+<p><strong>A:</strong> Same as FAQ1, please check whether the <strong>radio log</strong> of your phone.</p></li>
+<li><p><strong>Q:</strong> My phone can output radio log and radio log permission is granted, but outgoing call vibrate still not work.</p>
+
+<p><strong>A:</strong> Maybe the radio log format is modified by device manufacturer and is not compatible with AOSP source code. In such case, outgoing call feature would never work.</p>
+
+<p>You may try other ways to enable outgoing call vibrate, such as:</p>
+
+<ul>
+<li>Flash a custom <strong>ROM</strong> which has built-in support for outgoing call vibrate, e.g. <a href="http://www.cyanogenmod.org/">CyanogenMod ROM</a></li>
+<li>Install a Xposed module <a href="http://repo.xposed.info/module/com.gzplanet.xposed.xperiaphonevibrator">Android Phone Vibrator</a></li>
+</ul>
+</li>
+</ol>
+
 </div>
 
 
